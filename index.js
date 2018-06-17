@@ -1,32 +1,26 @@
 const express = require('express');
+const helmet = require('helmet');
+const DDOS = require('ddos');
+const PORT = process.env.PORT || 1337;
 const app = express();
-var server = require('http').createServer(app);
+
+// Add rate limit
+var ddos = new DDOS({burst:10, limit:15, errormessage:'STEP OFF ME'});
+app.use(ddos.express);
+
+// setup api routes
+app.use('/api/bitcoin', require('./api/bitcoin'));
+app.use('/api/device', require('./api/device'));
+
+// Improve security
+app.use(helmet({frameguard: {action: 'deny'}}));
+
+// handle static html hosting
 app.use(express.static('public'));
-require('./routes')(app);
+app.get('/', (req, res) => res.sendFile(__dirname + '/views/dashboard.html'));
 
 // Start server
-var listener = server.listen(8080, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
-});
-
-// export express so that any files we include can add a route
-// module.exports = app
-
-//after initializing the app, include all exposed api
-// require("./api")
-
-//set static files
-// app.use(express.static('public'));
-
-// set up root get
-// app.get("/", function (request, response) {
-//   response.sendFile(__dirname + '/views/dashboard.html');
-// });
-
-// // listen for requests
-// var listener = app.listen(8080, function () {
-//   console.log('Your app is listening on port ' + listener.address().port);
-// });
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 // ensure we don't crash the server on exception
 process.on('uncaughtException', function (err) {

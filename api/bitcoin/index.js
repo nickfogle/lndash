@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const {exec} = require('child_process');
+const bitcoin = require('../../lib/bitcoin');
 const OLD_BLOCK_COUNT = 500000
 
 // set up rpc
-var bitcoin = require.main.require('./lib/bitcoin');
 var client = new bitcoin.Client({
   host: '0.0.0.0',
   port: '8333',
@@ -22,7 +22,6 @@ router.get("/bitcoin/status", function(req, res) {
       console.log(err);
       return res.status(500).send(err);
     }
-
     if(result["blocks"] != null && result["blocks"] <  OLD_BLOCK_COUNT) {
       result["status"] = "Revalidating Chain: " + parseInt((result["blocks"] * 100)  / (OLD_BLOCK_COUNT )) + "%"
     }
