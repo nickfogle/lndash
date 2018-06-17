@@ -1,0 +1,2 @@
+require('./bitcoin');
+require('./device');

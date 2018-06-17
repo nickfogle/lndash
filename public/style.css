@@ -1,0 +1,31 @@
+.right {
+    float: right;
+}
+
+.status {
+    margin-left: 20px;
+}
+
+body {
+  background-image: url("bg2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  color: white;
+}
+
+li {
+  font-size: 20px;
+}
+
+h1 {
+  text-align: center
+}
+
+.well {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  box-shadow: inset 0 0 2px black, 0 0 2px black;
+  padding: 30px;
+  margin: 30px;
+}

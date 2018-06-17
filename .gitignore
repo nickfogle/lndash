@@ -1,0 +1,5 @@
+.node-persist
+.env
+node_modules/*
+logs
+constants.js

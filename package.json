@@ -1,0 +1,25 @@
+{
+  "name": "dashboard-app",
+  "version": "0.0.1",
+  "description": "A dashboard for the lightning node",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.15.4",
+    "request": "~2.82.0"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/welcome-project"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
