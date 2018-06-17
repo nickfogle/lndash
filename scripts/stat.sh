@@ -54,7 +54,7 @@ OS=$(lsb_release -s -i -c -r | tr '\n' ' ')
 UPTIME=$(uptime -p)
 ARCHITECTURE=$(uname -m)
 
-version=$(cat ./VERSION)
+version="0.1"
 
 temp=$(vcgencmd measure_temp | sed 's/temp=//g')
 

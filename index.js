@@ -9,8 +9,8 @@ var ddos = new DDOS({burst:10, limit:15, errormessage:'STEP OFF ME'});
 app.use(ddos.express);
 
 // setup api routes
-app.use('/api/bitcoin', require('./api/bitcoin'));
-app.use('/api/device', require('./api/device'));
+app.use('/api', require('./api/bitcoin'));
+app.use('/api', require('./api/device'));
 
 // Improve security
 app.use(helmet({frameguard: {action: 'deny'}}));

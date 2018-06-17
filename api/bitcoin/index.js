@@ -6,7 +6,7 @@ const OLD_BLOCK_COUNT = 500000
 
 // set up rpc
 var client = new bitcoin.Client({
-  host: '0.0.0.0',
+  host: '127.0.0.1',
   port: '8333',
   user: 'lightning',
   pass: 'thunder'
@@ -15,15 +15,10 @@ var client = new bitcoin.Client({
 // create status route
 router.get("/bitcoin/status", function(req, res) {
   client.getInfo(function(err, result) {
-    if(err && err.code == -28) {
-      return res.status('200').json({"status": "Reindexing Chain"});
-    }
+    console.log('getInfo result', result);
     if (err) {
       console.log(err);
       return res.status(500).send(err);
-    }
-    if(result["blocks"] != null && result["blocks"] <  OLD_BLOCK_COUNT) {
-      result["status"] = "Revalidating Chain: " + parseInt((result["blocks"] * 100)  / (OLD_BLOCK_COUNT )) + "%"
     }
     res.send(result);
   });
