@@ -1,6 +1,5 @@
 const {exec} = require('child_process');
 var app = require('./index.js');
-var storage = require('node-persist');
 
 var OLD_BLOCK_COUNT = 500000
 
@@ -59,11 +58,6 @@ app.get("/bitcoin/enable", function (req, res) {
       console.log(err);
       return res.status(500).json({"error": err});
     }
-
-    storage.init( /* options ... */ ).then(function() { // then start using it
-      storage.setItemSync('litecoin_enabled', true)
-    });
-
     res.send(stdout);
   });
 });
@@ -74,9 +68,6 @@ app.get("/bitcoin/disable", function (req, res) {
       console.log('error', err);
       return res.status(500).json({"error" : err});
     }
-    storage.init( /* options ... */ ).then(function() { // then start using it
-      storage.setItemSync('litecoin_enabled', false)
-    });
     res.send(stdout);
   });
 });

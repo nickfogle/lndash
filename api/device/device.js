@@ -1,14 +1,11 @@
-const { exec } = require('child_process');
-var app = require.main.require('./index.js');
-var Constants = require.main.require("./constants.js")
-var storage = require('node-persist');
+const {exec} = require('child_process');
+var app = require('./index.js');
 
 // create status route
 app.get("/device/status", function(req, res) {
-  storage.initSync()
   var deviceName = 'THUNDERDOME';
   res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify({bitcoin: storage.getItemSync('bitcoin_enabled'), deviceName}));
+  res.send(JSON.stringify({deviceName}));
 });
 
 // GET DEVICE LOGS
@@ -37,10 +34,6 @@ app.post("/device/reboot", function (req, res) {
 // GET DEVICE NAME
 app.put("/device/name", function(req, res) {
   var name = req.query.name;
-  if(name != null && name.length > 0) {
-    storage.initSync();
-    storage.setItemSync('device_name', name);
-  }
   res.send("SUCCESS")
 });
 
